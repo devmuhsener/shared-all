@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!-- Package Configuration -->
+    <PackageId>DevMuhsener.Shared.MediatR</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>devmuhsener</Authors>
+    <Company>yetenek.ai</Company>
+    <Description>A helpful library built on .NET 10</Description>
+    <PackageTags>dotnet10;utility</PackageTags>
+    <PackageOutputPath>$(HOME)/LocalNuGet</PackageOutputPath>
+
+    <!-- Generate the .nupkg file every time you build -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+<!--  <ItemGroup>-->
+<!--    <ProjectReference Include="../Shared.Core/Shared.Core.csproj" />-->
+<!--  </ItemGroup>-->
+
+  <ItemGroup>
+    <PackageReference Include="DevMuhsener.Shared.Core" Version="1.0.0" />
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+  </ItemGroup>
+
+</Project>

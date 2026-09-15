@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+
+
+    <!-- Package Configuration -->
+    <PackageId>DevMuhsener.Shared.EntityFramework</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>devmuhsener</Authors>
+    <Company>yetenek.ai</Company>
+    <Description>A helpful library built on .NET 10</Description>
+    <PackageTags>dotnet10;utility</PackageTags>
+    <PackageOutputPath>$(HOME)/LocalNuGet</PackageOutputPath>
+
+    <!-- Generate the .nupkg file every time you build -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+
+
+  <ItemGroup>
+    <PackageReference Include="DevMuhsener.Shared.Core" Version="1.0.0" />
+    
+    <PackageReference Include="EFCore.NamingConventions" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.2" />
+  </ItemGroup>
+
+</Project>
