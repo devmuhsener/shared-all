@@ -1,8 +1,9 @@
 using System.Collections.ObjectModel;
+using Shared.Core.Domain.Events;
 
 namespace Shared.Core.Domain.Entities;
 
-public abstract class GenericEntity<TId> : IEntity<TId>, IAuditable
+public abstract class GenericEntity<TId> : IEntity<TId>, IAuditable, IHasDomainEvents
 {
     private readonly List<IDomainEvent> _domainEvents = [];
 
@@ -29,9 +30,11 @@ public abstract class GenericEntity<TId> : IEntity<TId>, IAuditable
 
     public TId Id { get; } = default!;
 
-    public ReadOnlyCollection<IDomainEvent> ReleaseEvents()
+    public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    public IReadOnlyList<IDomainEvent> ReleaseEvents()
     {
-        var events = _domainEvents.AsReadOnly();
+        var events = _domainEvents.ToList();
         _domainEvents.Clear();
         return events;
     }

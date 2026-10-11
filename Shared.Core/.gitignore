@@ -5,6 +5,8 @@
 
 # dotenv files
 .env
+**/.env
+
 
 # User-specific files
 *.rsuser
@@ -484,3 +486,5 @@ $RECYCLE.BIN/
 # AI Agents
 **/.agents
 **/.gemini
+
+*.mmdb

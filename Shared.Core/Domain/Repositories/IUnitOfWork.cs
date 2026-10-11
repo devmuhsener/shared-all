@@ -1,6 +1,9 @@
 namespace Shared.Core.Domain.Repositories;
 
-public interface IUnitOfWork : IDisposable, IAsyncDisposable
+public interface IUnitOfWork
 {
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+    Task ExecuteInTransactionAsync(Func<CancellationToken, Task> action, CancellationToken cancellationToken = default);
+
+    Task<TResult> ExecuteInTransactionAsync<TResult>(Func<CancellationToken, Task<TResult>> action,
+        CancellationToken cancellationToken = default);
 }

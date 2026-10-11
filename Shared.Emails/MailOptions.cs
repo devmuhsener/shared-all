@@ -2,6 +2,7 @@ namespace Shared.Emails;
 
 public class MailOptions
 {
+    public const string SectionName = "Mail";
     public string Host { get; set; } = "localhost";
     public int Port { get; set; } = 1025;
     public bool UseSsl { get; set; } = false;
@@ -9,4 +10,5 @@ public class MailOptions
     public string SenderName { get; set; } = "Identity System";
     public string? UserName { get; set; }
     public string? Password { get; set; }
+    public int TimeoutMilliSeconds { get; set; } = 10_000;
 }

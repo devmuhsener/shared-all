@@ -1,10 +1,10 @@
 using System.Net;
-using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Shared.Core.Domain.Exceptions;
+using ValidationException = Shared.Core.Domain.Exceptions.ValidationException;
 
 namespace Shared.Mvc.Handlers
 {
@@ -52,14 +52,41 @@ namespace Shared.Mvc.Handlers
                     problemDetails.Status = (int)HttpStatusCode.Forbidden;
                     problemDetails.Detail = unauthorized.Message;
                     break;
-                case ValidationException validation:
-                {
-                    var map = new Dictionary<string, string>();
-                    problemDetails.Extensions.Add("errors",
-                        validation.Errors.ToDictionary(x => x.PropertyName, x => x.ErrorMessage));
-                }
+                case FluentValidation.ValidationException validation:
+                    problemDetails.Extensions.Add(
+                        "errors",
+                        validation.Errors.GroupBy(x => x.PropertyName.Trim())
+                            .ToDictionary(
+                                keySelector: g => g.Key,
+                                elementSelector: g => g.Select(e => e.ErrorCode).ToList()
+                            )
+                    );
                     problemDetails.Title = "One or more validation errors occurred.";
                     problemDetails.Status = (int)HttpStatusCode.BadRequest;
+                    problemDetails.Extensions["code"] = "VALIDATION_FAILED";
+                    break;
+                case AppException appEx:
+                    problemDetails.Title = appEx.Title;
+                    problemDetails.Status = appEx.Status;
+                    problemDetails.Detail = appEx.Message;
+                    problemDetails.Extensions["code"] = appEx.Code;
+                    if (appEx is TooManyRequestsException { RetryAfterSeconds: not null } tmrEx)
+                    {
+                        httpContext.Response.Headers.RetryAfter = tmrEx.RetryAfterSeconds.Value.ToString();
+                    }
+
+
+                    if (appEx is ValidationException validationEx)
+                    {
+
+                        problemDetails.Extensions["errors"] = validationEx.Errors;
+                    }
+
+                    foreach (var ext in appEx.Extensions)
+                    {
+                        problemDetails.Extensions[ext.Key] = ext.Value;
+                    }
+
                     break;
                 default:
                     logger.LogError(exception, "An error happened: {Message}", exception.Message);

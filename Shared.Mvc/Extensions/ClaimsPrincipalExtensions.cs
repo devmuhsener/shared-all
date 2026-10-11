@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using Shared.Core.Domain.Exceptions;
-using Shared.Core.Domain.ValueObjects;
+using Shared.Core.Domain.VOs;
 
 namespace Shared.Mvc.Extensions;
 

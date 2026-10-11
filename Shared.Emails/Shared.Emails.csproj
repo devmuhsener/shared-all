@@ -28,9 +28,14 @@
 <!--    </ItemGroup>-->
 
     <ItemGroup>
-        <PackageReference Include="DevMuhsener.Shared.Core" Version="1.0.0" />
         <PackageReference Include="Fluid.Core" Version="2.31.0"/>
         <PackageReference Include="MailKit" Version="4.17.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Shared.Core\Shared.Core.csproj" />
+      <ProjectReference Include="..\Shared.Events\Shared.Events.csproj" />
+      <ProjectReference Include="..\Shared.Wolverine\Shared.Wolverine.csproj" />
     </ItemGroup>
 
 </Project>

@@ -2,21 +2,22 @@ using Shared.Core.Domain.Entities;
 
 namespace Shared.Core.Domain.Repositories;
 
-public interface IRepository<TEntity, in TId> where TEntity : IEntity<TId>
+public interface IRepository<TEntity, in TId> where TEntity : class, IEntity<TId>
 {
-    public Task<TEntity> SaveAsync(TEntity entity, CancellationToken cancellationToken = default);
+    Task<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
 
-    public Task SoftDeleteAsync(TId id, CancellationToken cancellationToken = default);
+    // Task<TEntity?> GetByIdNoTrackingAsync(TId id, CancellationToken cancellationToken = default);
 
-    public Task<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
 
-    public Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
 
-    public Task SoftDeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
+    Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
 
-    public Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
+    Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
 
-    public IQueryable<TEntity> Query();
+    void Update(TEntity entity);
 
-    public Task SaveManyAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
+    void Delete(TEntity entity);
+
+    Task DeleteByIdAsync(TId id, CancellationToken cancellationToken = default);
 }

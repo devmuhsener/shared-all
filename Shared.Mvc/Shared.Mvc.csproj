@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -18,19 +18,18 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-<!--  <ItemGroup>-->
-<!--    <ProjectReference Include="../Shared.Core/Shared.Core.csproj" />-->
-<!--    <ProjectReference Include="../Shared.MediatR/Shared.MediatR.csproj" />-->
-<!--  </ItemGroup>-->
-  
   <ItemGroup>
-    <PackageReference Include="DevMuhsener.Shared.Core" Version="1.0.0" />
-    <PackageReference Include="DevMuhsener.Shared.MediatR" Version="1.0.0" />
+    <ProjectReference Include="../Shared.Core/Shared.Core.csproj" />
+    <ProjectReference Include="../Shared.MediatR/Shared.MediatR.csproj" />
   </ItemGroup>
 
     <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Models\" />
+    </ItemGroup>
 
 
 

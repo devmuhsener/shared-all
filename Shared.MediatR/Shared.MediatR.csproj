@@ -18,12 +18,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-<!--  <ItemGroup>-->
-<!--    <ProjectReference Include="../Shared.Core/Shared.Core.csproj" />-->
-<!--  </ItemGroup>-->
+  <ItemGroup>
+    <ProjectReference Include="../Shared.Core/Shared.Core.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DevMuhsener.Shared.Core" Version="1.0.0" />
     <PackageReference Include="FluentValidation" Version="12.1.1" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
     <PackageReference Include="MediatR" Version="12.5.0" />

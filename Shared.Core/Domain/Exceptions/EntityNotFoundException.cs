@@ -1,6 +1,6 @@
 namespace Shared.Core.Domain.Exceptions;
 
-public class EntityNotFoundException : NotFoundException
+public class EntityNotFoundException : Exception
 {
     public EntityNotFoundException(string message) : base(message)
     {
